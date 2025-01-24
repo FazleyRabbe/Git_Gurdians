@@ -43,15 +43,15 @@ namespace ApprovedMultiSequenceLearningNew
                 CellsPerColumn = 25,
                 GlobalInhibition = true,
                 LocalAreaDensity = -1,
-                NumActiveColumnsPerInhArea = 0.02 * numColumns,
-                PotentialRadius = (int)(0.15 * inputBits),
+                NumActiveColumnsPerInhArea = 0.03 * numColumns, // CHANGED
+                PotentialRadius = (int)(0.8 * inputBits), // CHANGED
                 MaxBoost = 10.0,
                 DutyCyclePeriod = 25,
                 MinPctOverlapDutyCycles = 0.75,
-                MaxSynapsesPerSegment = (int)(0.02 * numColumns),
+                MaxSynapsesPerSegment = (int)(0.06 * numColumns), // CHANGED
                 ActivationThreshold = 15,
                 ConnectedPermanence = 0.5,
-                PermanenceDecrement = 0.25,
+                PermanenceDecrement = 0.10, // CHANGED (was 0.25)
                 PermanenceIncrement = 0.15,
                 PredictedSegmentDecrement = 0.1,
             };
