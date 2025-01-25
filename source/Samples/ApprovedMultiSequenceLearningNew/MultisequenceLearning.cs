@@ -23,8 +23,8 @@ namespace ApprovedMultiSequenceLearningNew
         public Predictor Run(List<Sequence> sequences)
         {
             Console.WriteLine($"Hello NeocortexApi! {nameof(MultiSequenceLearning)}");
-            int inputBits = 100;
-            int numColumns = 1024;
+            int inputBits = 300;
+            int numColumns = 2048;
             HtmConfig cfg = HelperMethods.FetchHTMConfig(inputBits, numColumns);
             EncoderBase encoder = HelperMethods.GetEncoder(inputBits);
             return RunExperiment(inputBits, cfg, encoder, sequences);
