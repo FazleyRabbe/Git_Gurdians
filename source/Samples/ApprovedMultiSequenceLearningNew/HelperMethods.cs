@@ -34,7 +34,9 @@ namespace ApprovedMultiSequenceLearningNew
         /// <summary>
         /// HTM Config for creating Connections
         /// </summary>
-        public static HtmConfig FetchHTMConfig(int inputBits, int numColumns)
+       
+        /// CHANGED  - using New method: FetchEnhancedHTMConfig
+        public static HtmConfig FetchEnhancedHTMConfig(int inputBits, int numColumns)
         {
             return new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
             {
@@ -60,8 +62,10 @@ namespace ApprovedMultiSequenceLearningNew
 
         /// <summary>
         /// Get the encoder with settings
-        /// </summary>
-        public static EncoderBase GetEncoder(int inputBits)
+        /// </summary>  
+       
+        /// CHANGED - Using New method: GetEnhancedEncoder
+        public static EncoderBase GetEnhancedEncoder(int inputBits)  
         {
             var settings = new Dictionary<string, object>
             {
