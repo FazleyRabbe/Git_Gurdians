@@ -25,8 +25,10 @@ namespace ApprovedMultiSequenceLearningNew
             Console.WriteLine($"Hello NeocortexApi! {nameof(MultiSequenceLearning)}");
             int inputBits = 300;
             int numColumns = 2048;
-            HtmConfig cfg = HelperMethods.FetchHTMConfig(inputBits, numColumns);
-            EncoderBase encoder = HelperMethods.GetEncoder(inputBits);
+
+            //  CHANGED  – use the enhanced config & encoder:
+            HtmConfig cfg = HelperMethods.FetchEnhancedHTMConfig(inputBits, numColumns);
+            EncoderBase encoder = HelperMethods.GetEnhancedEncoder(inputBits);
             return RunExperiment(inputBits, cfg, encoder, sequences);
         }
         private Predictor RunExperiment(int inputBits, HtmConfig cfg, EncoderBase encoder, List<Sequence> sequences)
