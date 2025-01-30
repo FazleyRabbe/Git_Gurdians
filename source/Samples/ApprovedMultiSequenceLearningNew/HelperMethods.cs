@@ -42,20 +42,30 @@ namespace ApprovedMultiSequenceLearningNew
             {
                 Random = new ThreadSafeRandom(42),
 
-                CellsPerColumn = 25,
-                GlobalInhibition = true,
-                LocalAreaDensity = -1,
-                NumActiveColumnsPerInhArea = 0.03 * numColumns, // CHANGED
-                PotentialRadius = (int)(0.8 * inputBits), // CHANGED
+                // *** CHANGED *** – changed from 25 to 32
+                CellsPerColumn = 32,
+
+                // *** CHANGED *** – use local inhibition
+                GlobalInhibition = false,
+                LocalAreaDensity = 0.02,
+
+                // *** CHANGED *** – 2% active columns
+                NumActiveColumnsPerInhArea = 0.02 * numColumns,
+
+                // *** CHANGED *** – potential radius half of input for broader coverage
+                PotentialRadius = (int)(0.5 * inputBits),
+
                 MaxBoost = 10.0,
                 DutyCyclePeriod = 25,
                 MinPctOverlapDutyCycles = 0.75,
-                MaxSynapsesPerSegment = (int)(0.06 * numColumns), // CHANGED
-                ActivationThreshold = 15,
-                ConnectedPermanence = 0.5,
-                PermanenceDecrement = 0.10, // CHANGED (was 0.25)
-                PermanenceIncrement = 0.15,
-                PredictedSegmentDecrement = 0.1,
+
+                // *** CHANGED *** – smaller threshold & more forgiving permanence
+                MaxSynapsesPerSegment = (int)(0.02 * numColumns),
+                ActivationThreshold = 12,
+                ConnectedPermanence = 0.2,
+                PermanenceDecrement = 0.015,
+                PermanenceIncrement = 0.03,
+                PredictedSegmentDecrement = 0.01,
             };
 
         }
