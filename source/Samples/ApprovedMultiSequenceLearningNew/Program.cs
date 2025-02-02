@@ -15,9 +15,9 @@ namespace ApprovedMultiSequenceLearningNew
         private const string DatasetFolder = "dataset";
         private const string ReportFolder = "report";
 
-        //private const string DatasetFileName = "dataset_01.json";
+        private const string DatasetFileName = "dataset_01.json";
         //private const string DatasetFileName = "dataset_03.json";
-        private const string DatasetFileName = "dataset_02.json";
+        //private const string DatasetFileName = "dataset_02.json";
         private const string TestsetFileName = "test_01.json";
 
         static void Main(string[] args)

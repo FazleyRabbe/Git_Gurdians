@@ -72,7 +72,7 @@ namespace ApprovedMultiSequenceLearningNew
 
             var lastPredictedValues = new List<string>(new string[] { "0" });
 
-            int maxCycles = 5000; //Changed from 3500 for checking comit
+            int maxCycles = 3500; 
 
 
             //  New-born stage. In this stage, the SP is trained on the input patterns.

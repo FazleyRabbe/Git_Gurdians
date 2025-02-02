@@ -79,7 +79,7 @@ namespace ApprovedMultiSequenceLearningNew
         {
             var settings = new Dictionary<string, object>
             {
-                { "W", 15 },
+                { "W", 21 }, // *** CHANGED *** – bigger encoding dimension
                 { "N", inputBits },
                 { "Radius", -1.0 },
                 { "MinVal", 0.0 },
