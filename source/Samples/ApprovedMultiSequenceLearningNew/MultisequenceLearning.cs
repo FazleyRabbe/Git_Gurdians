@@ -83,7 +83,9 @@ namespace ApprovedMultiSequenceLearningNew
             // *** CHANGED *** – NEWBORN STAGE: multiple passes training only SP
             for (int pass = 0; pass < trainingPasses && !isInStableState; pass++)
             {
-                
+                Console.WriteLine($"=== Newborn SP Training Pass {pass + 1} ===");
+
+
 
                 for (int i = 0; i < maxCycles && isInStableState == false; i++)
                 {
