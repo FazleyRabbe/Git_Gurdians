@@ -72,8 +72,10 @@ namespace ApprovedMultiSequenceLearningNew
 
             var lastPredictedValues = new List<string>(new string[] { "0" });
 
-            int maxCycles = 3500; 
+            int maxCycles = 3500;
 
+            // *** CHANGED *** – multiple newborn passes to stabilize SP:
+            int trainingPasses = 0; // *** CHANGED *** (you can tweak the pass count)
 
             //  New-born stage. In this stage, the SP is trained on the input patterns.
 
