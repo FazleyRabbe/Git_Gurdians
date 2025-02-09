@@ -75,34 +75,40 @@ namespace ApprovedMultiSequenceLearningNew
             int maxCycles = 3500;
 
             // *** CHANGED *** – multiple newborn passes to stabilize SP:
-            int trainingPasses = 0; // *** CHANGED *** (you can tweak the pass count)
-
-            //  New-born stage. In this stage, the SP is trained on the input patterns.
+            int trainingPasses = 2; // *** CHANGED *** (you can tweak the pass count)
 
 
-            for (int i = 0; i < maxCycles && isInStableState == false; i++)
+
+           
+            // *** CHANGED *** – NEWBORN STAGE: multiple passes training only SP
+            for (int pass = 0; pass < trainingPasses && !isInStableState; pass++)
             {
-                matches = 0;
+                
 
-                cycle++;
-
-                Debug.WriteLine($"************** Newborn SP Cycle {cycle} **************");
-                Console.WriteLine($"************** Newborn SP Cycle {cycle} **************");
-
-                foreach (var inputs in sequences)
+                for (int i = 0; i < maxCycles && isInStableState == false; i++)
                 {
-                    foreach (var input in inputs.data)
-                    {
-                        Debug.WriteLine($" -- {inputs.name} - {input} --");
+                    matches = 0;
 
-                        var lyrOut = layer1.Compute(input, true);
+                    cycle++;
+
+                    Debug.WriteLine($"************** Newborn SP Cycle {cycle} **************");
+                    Console.WriteLine($"************** Newborn SP Cycle {cycle} **************");
+
+                    foreach (var inputs in sequences)
+                    {
+                        foreach (var input in inputs.data)
+                        {
+                            Debug.WriteLine($" -- {inputs.name} - {input} --");
+
+                            var lyrOut = layer1.Compute(input, true);
+
+                            if (isInStableState)
+                                break;
+                        }
 
                         if (isInStableState)
                             break;
                     }
-
-                    if (isInStableState)
-                        break;
                 }
             }
 
