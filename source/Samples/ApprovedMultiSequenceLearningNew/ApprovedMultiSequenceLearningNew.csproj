@@ -24,6 +24,9 @@
     <None Update="DataSet\dataset_03.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="DataSet\dataset_04.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DataSet\test_01.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
