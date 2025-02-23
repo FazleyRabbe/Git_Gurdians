@@ -86,7 +86,7 @@ namespace ApprovedMultiSequenceLearningNew
                 { "Periodic", false },
                 { "Name", "scalar" },
                 { "ClipInput", false },
-                { "MaxVal", 20.0 }
+                { "MaxVal", MaxScalarValue }
             };
 
             return new ScalarEncoder(settings);
