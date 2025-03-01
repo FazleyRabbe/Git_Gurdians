@@ -24,7 +24,7 @@ namespace ApprovedMultiSequenceLearningNew
         {
             Console.WriteLine($"Hello NeocortexApi! {nameof(MultiSequenceLearning)}");
             int inputBits = 400;
-            int numColumns = 2048;
+            int numColumns = 4096;
 
             //  CHANGED  – use the enhanced config & encoder:
             HtmConfig cfg = HelperMethods.FetchEnhancedHTMConfig(inputBits, numColumns);
