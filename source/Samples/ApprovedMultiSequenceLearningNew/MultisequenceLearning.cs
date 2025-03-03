@@ -72,14 +72,14 @@ namespace ApprovedMultiSequenceLearningNew
 
             var lastPredictedValues = new List<string>(new string[] { "0" });
 
-            int maxCycles = 3800;
+            int maxCycles = 3500;
 
             // *** CHANGED *** – multiple newborn passes to stabilize SP:
-            int trainingPasses = 3; // *** CHANGED *** (you can tweak the pass count)
+            int trainingPasses = 4; // *** CHANGED *** (More passes for better learning)
 
 
 
-           
+
             // *** CHANGED *** – NEWBORN STAGE: multiple passes training only SP
             for (int pass = 0; pass < trainingPasses && !isInStableState; pass++)
             {
