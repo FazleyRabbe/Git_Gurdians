@@ -72,16 +72,19 @@ namespace ApprovedMultiSequenceLearningNew
 
             var lastPredictedValues = new List<string>(new string[] { "0" });
 
+            int maxCycles = 4000;
             int maxCycles = 3500;
 
             // *** CHANGED *** – multiple newborn passes to stabilize SP:
+            int sptrainingPasses = 3; // *** CHANGED *** (you can tweak the pass count)
+            int tmTrainingPasses = 2;
             int trainingPasses = 4; // *** CHANGED *** (More passes for better learning)
 
 
 
 
             // *** CHANGED *** – NEWBORN STAGE: multiple passes training only SP
-            for (int pass = 0; pass < trainingPasses && !isInStableState; pass++)
+            for (int pass = 0; pass < sptrainingPasses && !isInStableState; pass++)
             {
                 Console.WriteLine($"=== Newborn SP Training Pass {pass + 1} ===");
 
@@ -122,7 +125,12 @@ namespace ApprovedMultiSequenceLearningNew
 
             //
             // Loop over all sequences.
-            foreach (var sequenceKeyPair in sequences)
+
+            for (int pass = 0; pass < tmTrainingPasses; pass++) // *** CHANGED FOR HIGHER ACCURACY ***
+            {
+                Console.WriteLine($"=== SP+TM Training Pass {pass + 1} ===");
+
+                foreach (var sequenceKeyPair in sequences)
             {
                 Debug.WriteLine($"************** Sequences {sequenceKeyPair.name} **************");
                 Console.WriteLine($"************** Sequences {sequenceKeyPair.name} **************");
@@ -157,7 +165,7 @@ namespace ApprovedMultiSequenceLearningNew
                         if (previousInputs.Count > (maxPrevInputs + 1))
                             previousInputs.RemoveAt(0);
 
-                       
+
 
                         if (previousInputs.Count < maxPrevInputs)
                             continue;
@@ -180,7 +188,7 @@ namespace ApprovedMultiSequenceLearningNew
                         Debug.WriteLine($"Col  SDR: {Helpers.StringifyVector(lyrOut.ActivColumnIndicies)}");
                         Debug.WriteLine($"Cell SDR: {Helpers.StringifyVector(actCells.Select(c => c.Index).ToArray())}");
 
-                        
+
                         if (lastPredictedValues.Contains(key))
                         {
                             matches++;
@@ -240,6 +248,7 @@ namespace ApprovedMultiSequenceLearningNew
                 }
             }
 
+        }
             Debug.WriteLine("************** END **************");
 
             return new Predictor(layer1, mem, cls);
