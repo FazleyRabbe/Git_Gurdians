@@ -81,7 +81,7 @@ namespace ApprovedMultiSequenceLearningNew
             int trainingPasses = 4; // *** CHANGED *** (More passes for better learning)
 
 
-
+gi
 
             // *** CHANGED *** – NEWBORN STAGE: multiple passes training only SP
             for (int pass = 0; pass < sptrainingPasses && !isInStableState; pass++)
@@ -159,7 +159,7 @@ namespace ApprovedMultiSequenceLearningNew
 
                         var lyrOut = layer1.Compute(input, true) as ComputeCycle;
 
-                        var activeColumns = layer1.GetResult("sp") as int[];
+                        // var activeColumns = layer1.GetResult("sp") as int[];
 
                         previousInputs.Add(input.ToString());
                         if (previousInputs.Count > (maxPrevInputs + 1))
@@ -172,24 +172,36 @@ namespace ApprovedMultiSequenceLearningNew
 
                         string key = GetKey(previousInputs, input, sequenceKeyPair.name);
 
-                        List<Cell> actCells;
 
-                        if (lyrOut.ActiveCells.Count == lyrOut.WinnerCells.Count)
-                        {
-                            actCells = lyrOut.ActiveCells;
-                        }
-                        else
-                        {
-                            actCells = lyrOut.WinnerCells;
-                        }
+                            //chaged
 
-                        cls.Learn(key, actCells.ToArray());
+                            //List<Cell> actCells;
 
-                        Debug.WriteLine($"Col  SDR: {Helpers.StringifyVector(lyrOut.ActivColumnIndicies)}");
-                        Debug.WriteLine($"Cell SDR: {Helpers.StringifyVector(actCells.Select(c => c.Index).ToArray())}");
+                            //if (lyrOut.ActiveCells.Count == lyrOut.WinnerCells.Count)
+                            //{
+                            //  actCells = lyrOut.ActiveCells;
+                            // }
+                            //else
+                            // {
+                            //    actCells = lyrOut.WinnerCells;
+                            // }
+
+                            //cls.Learn(key, actCells.ToArray());
+
+                            //Debug.WriteLine($"Col  SDR: {Helpers.StringifyVector(lyrOut.ActivColumnIndicies)}");
+                            //Debug.WriteLine($"Cell SDR: {Helpers.StringifyVector(actCells.Select(c => c.Index).ToArray())}");
 
 
-                        if (lastPredictedValues.Contains(key))
+                            //changed
+
+
+                            // Active or winner cells
+
+                            List<Cell> actCells = (lyrOut.ActiveCells.Count == lyrOut.WinnerCells.Count)
+                                ? lyrOut.ActiveCells
+                                : lyrOut.WinnerCells;
+
+                            if (lastPredictedValues.Contains(key))
                         {
                             matches++;
                             Debug.WriteLine($"Match. Actual value: {key} - Predicted value: {lastPredictedValues.FirstOrDefault(key)}.");
