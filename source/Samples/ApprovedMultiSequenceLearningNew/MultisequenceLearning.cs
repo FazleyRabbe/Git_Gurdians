@@ -201,6 +201,9 @@ gi
                                 ? lyrOut.ActiveCells
                                 : lyrOut.WinnerCells;
 
+                            // Train classifier
+                            cls.Learn(key, actCells.ToArray());
+
                             if (lastPredictedValues.Contains(key))
                         {
                             matches++;
