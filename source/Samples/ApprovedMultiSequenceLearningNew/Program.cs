@@ -20,6 +20,7 @@ namespace ApprovedMultiSequenceLearningNew
         //private const string DatasetFileName = "dataset_02.json";
         //private const string DatasetFileName = "dataset_04.json";
         private const string TestsetFileName = "test_01.json";
+        //private const string TestsetFileName = "test_02.json";
 
         static void Main(string[] args)
         {

@@ -79,7 +79,7 @@ namespace ApprovedMultiSequenceLearningNew
         {
             var settings = new Dictionary<string, object>
             {
-                { "W", 25 }, // increased for better encoding overlap
+                { "W", 15 }, // increased for better encoding overlap
                 { "N", inputBits },
                 { "Radius", -1.0 },
                 { "MinVal", 0.0 },
