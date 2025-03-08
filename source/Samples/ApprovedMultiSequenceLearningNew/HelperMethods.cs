@@ -47,7 +47,7 @@ namespace ApprovedMultiSequenceLearningNew
 
                 // *** CHANGED *** – use local inhibition
                 GlobalInhibition = false,
-                LocalAreaDensity = 0.02,
+                LocalAreaDensity = 0.03,
 
                 // *** CHANGED *** – 2% active columns
                 NumActiveColumnsPerInhArea = 0.02 * numColumns,
@@ -61,11 +61,11 @@ namespace ApprovedMultiSequenceLearningNew
 
                 // *** CHANGED *** – smaller threshold & more forgiving permanence
                 MaxSynapsesPerSegment = (int)(0.02 * numColumns),
-                ActivationThreshold = 12,
+                ActivationThreshold = 10,
                 ConnectedPermanence = 0.2,
-                PermanenceDecrement = 0.015,
+                PermanenceDecrement = 0.01,
                 PermanenceIncrement = 0.03,
-                PredictedSegmentDecrement = 0.01,
+                PredictedSegmentDecrement = 0.005,
             };
 
         }
