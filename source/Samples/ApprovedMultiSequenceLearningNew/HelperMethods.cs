@@ -36,7 +36,7 @@ namespace ApprovedMultiSequenceLearningNew
         /// </summary>
        
         /// CHANGED  - using New method: FetchEnhancedHTMConfig
-        public static HtmConfig FetchEnhancedHTMConfig(int inputBits, int numColumns)
+        public static HtmConfig FetchHTMConfig(int inputBits, int numColumns)
         {
             return new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
             {
@@ -47,7 +47,7 @@ namespace ApprovedMultiSequenceLearningNew
 
                 // *** CHANGED *** – use local inhibition
                 GlobalInhibition = false,
-                LocalAreaDensity = 0.02,
+                LocalAreaDensity = -1,
 
                 // *** CHANGED *** – 2% active columns
                 NumActiveColumnsPerInhArea = 0.02 * numColumns,
@@ -62,7 +62,7 @@ namespace ApprovedMultiSequenceLearningNew
                 // *** CHANGED *** – smaller threshold & more forgiving permanence
                 MaxSynapsesPerSegment = (int)(0.02 * numColumns),
                 ActivationThreshold = 12,
-                ConnectedPermanence = 0.2,
+                ConnectedPermanence = 0.5,
                 PermanenceDecrement = 0.015,
                 PermanenceIncrement = 0.03,
                 PredictedSegmentDecrement = 0.01,
@@ -75,7 +75,7 @@ namespace ApprovedMultiSequenceLearningNew
         /// </summary>  
        
         /// CHANGED - Using New method: GetEnhancedEncoder
-        public static EncoderBase GetEnhancedEncoder(int inputBits)  
+        public static EncoderBase GetEncoder(int inputBits)  
         {
             var settings = new Dictionary<string, object>
             {
