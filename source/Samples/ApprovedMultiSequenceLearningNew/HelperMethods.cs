@@ -36,7 +36,7 @@ namespace ApprovedMultiSequenceLearningNew
         /// </summary>
        
         /// CHANGED  - using New method: FetchEnhancedHTMConfig
-        public static HtmConfig FetchEnhancedHTMConfig(int inputBits, int numColumns)
+        public static HtmConfig FetchHTMConfig(int inputBits, int numColumns)
         {
             return new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
             {
@@ -75,7 +75,7 @@ namespace ApprovedMultiSequenceLearningNew
         /// </summary>  
        
         /// CHANGED - Using New method: GetEnhancedEncoder
-        public static EncoderBase GetEnhancedEncoder(int inputBits)  
+        public static EncoderBase GetEncoder(int inputBits)  
         {
             var settings = new Dictionary<string, object>
             {
