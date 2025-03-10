@@ -24,7 +24,7 @@ namespace ApprovedMultiSequenceLearningNew
         {
             Console.WriteLine($"Hello NeocortexApi! {nameof(MultiSequenceLearning)}");
             int inputBits = 100;
-            int numColumns = 2048;
+            int numColumns = 1024;
 
             //  CHANGED  – use the enhanced config & encoder:
             HtmConfig cfg = HelperMethods.FetchEnhancedHTMConfig(inputBits, numColumns);
@@ -65,14 +65,14 @@ namespace ApprovedMultiSequenceLearningNew
             layer1.HtmModules.Add("encoder", encoder);
             layer1.HtmModules.Add("sp", sp);
 
-            int[] prevActiveCols = new int[0];
+            //int[] prevActiveCols = new int[0];
 
             int cycle = 0;
             int matches = 0;
 
             var lastPredictedValues = new List<string>(new string[] { "0" });
 
-            int maxCycles = 1500;
+            int maxCycles = 2000;
 
             // *** CHANGED *** – multiple newborn passes to stabilize SP:
             int sptrainingPasses = 3; // *** CHANGED *** (you can tweak the pass count)
