@@ -75,11 +75,9 @@ namespace ApprovedMultiSequenceLearningNew
             int maxCycles = 2000;
 
             // *** CHANGED *** – multiple newborn passes to stabilize SP:
-            int sptrainingPasses = 3; // *** CHANGED *** (you can tweak the pass count)
+            int sptrainingPasses = 2; // *** CHANGED *** (you can tweak the pass count)
             int tmTrainingPasses = 2;
-            int trainingPasses = 4; // *** CHANGED *** (More passes for better learning)
-
-
+  
             // *** CHANGED *** – NEWBORN STAGE: multiple passes training only SP
             for (int pass = 0; pass < sptrainingPasses && !isInStableState; pass++)
             {
