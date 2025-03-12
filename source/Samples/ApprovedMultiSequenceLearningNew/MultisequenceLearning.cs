@@ -211,12 +211,6 @@ namespace ApprovedMultiSequenceLearningNew
                         {
                             // Get the predicted input values.
                             var predictedInputValues = cls.GetPredictedInputValues(lyrOut.PredictiveCells.ToArray(), 3);
-
-                            foreach (var item in predictedInputValues)
-                            {
-                                Debug.WriteLine($"Current Input: {input} \t| Predicted Input: {item.PredictedInput} - {item.Similarity}");
-                            }
-
                             lastPredictedValues = predictedInputValues.Select(v => v.PredictedInput).ToList();
                         }
                         else
@@ -249,17 +243,18 @@ namespace ApprovedMultiSequenceLearningNew
                     }
                     else if (maxMatchCnt > 0)
                     {
-                        Debug.WriteLine($"At 100% accuracy after {maxMatchCnt} repeats we get a drop of accuracy with accuracy {accuracy}. This indicates instable state. Learning will be continued.");
-                        maxMatchCnt = 0;
+                            Debug.WriteLine($"Accuracy drop to {accuracy}% => not stable. Continue training.");
+                            maxMatchCnt = 0;
                     }
 
                     // If the algorithm is not in the stable state, we need to reset the SP and TM.
-                    tm.Reset(mem);
+                    //tm.Reset(mem);
                 }
             }
 
         }
             Debug.WriteLine("************** END **************");
+            sw.Stop();
 
             return new Predictor(layer1, mem, cls);
         }
