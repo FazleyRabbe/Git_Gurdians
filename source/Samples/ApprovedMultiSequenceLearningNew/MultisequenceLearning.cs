@@ -168,27 +168,6 @@ namespace ApprovedMultiSequenceLearningNew
                         string key = GetKey(previousInputs, input, sequenceKeyPair.name);
 
 
-                            //chaged
-
-                            //List<Cell> actCells;
-
-                            //if (lyrOut.ActiveCells.Count == lyrOut.WinnerCells.Count)
-                            //{
-                            //  actCells = lyrOut.ActiveCells;
-                            // }
-                            //else
-                            // {
-                            //    actCells = lyrOut.WinnerCells;
-                            // }
-
-                            //cls.Learn(key, actCells.ToArray());
-
-                            //Debug.WriteLine($"Col  SDR: {Helpers.StringifyVector(lyrOut.ActivColumnIndicies)}");
-                            //Debug.WriteLine($"Cell SDR: {Helpers.StringifyVector(actCells.Select(c => c.Index).ToArray())}");
-
-
-                            //changed
-
 
                             // Active or winner cells
 
@@ -247,8 +226,6 @@ namespace ApprovedMultiSequenceLearningNew
                             maxMatchCnt = 0;
                     }
 
-                    // If the algorithm is not in the stable state, we need to reset the SP and TM.
-                    //tm.Reset(mem);
                 }
             }
 

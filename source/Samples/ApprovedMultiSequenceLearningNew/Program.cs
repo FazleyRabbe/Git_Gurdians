@@ -93,7 +93,8 @@ namespace ApprovedMultiSequenceLearningNew
                     SequenceName = item.name,
                     SequenceData = item.data
                 };
-
+                Console.WriteLine("*******#######*******");
+                Console.WriteLine($"Test Sequence  {item.name}: {string.Join(", ", item.data)}");
                 double accuracy = PredictNextElement(predictor, item.data, report);
                 report.Accuracy = accuracy;
                 reports.Add(report);
