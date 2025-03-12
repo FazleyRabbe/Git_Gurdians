@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="HelperMethods.cs~RF62314b08.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\NeoCortexApi\NeoCortexApi.csproj" />
     <ProjectReference Include="..\..\NeoCortexArrayLib\NeoCortexArrayLib.csproj" />
     <ProjectReference Include="..\..\NeoCortexEntities\NeoCortexEntities.csproj" />
