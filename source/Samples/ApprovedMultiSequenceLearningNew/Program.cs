@@ -24,6 +24,43 @@ namespace ApprovedMultiSequenceLearningNew
 
         static void Main(string[] args)
         {
+
+            Console.WriteLine("************   ML-23/24-09   Approve Prediction of Multi Sequence Learning    ************** \n ");
+            Console.WriteLine("**************  Scenario - 1 - Cancer_Prediction             ************** ");
+            Console.WriteLine("**************  Scenario - 2 - Power_Consumption_Prediction  ************** ");
+
+            Console.WriteLine("\n");
+            Console.WriteLine("Please Enter A Scenario Number to Continue with MultiSequence Experiment");
+            string input = Console.ReadLine();      // Read user input (always returns string)
+            int userInput = int.Parse(input);
+
+            switch (userInput)
+            {
+                case 1:
+                    Console.WriteLine("User Selected MultiSequence Experiment - Cancer_Prediction\n");
+
+                    //CancerPredictionTrainingAndTesting cancerPrediction = new CancerPredictionTrainingAndTesting();
+                    // cancerPrediction.RunMultiSequenceLearningExperiment(userInput, CancerTrainingDataFile, CancerTestingDataFile);
+                    break;
+                case 2:
+                    Console.WriteLine("User Selected MultiSequence Experiment - Power_Consumption_Prediction\n");
+                    IntegerPrediction();
+                    break;
+
+                default:
+                    Console.WriteLine("User Entered Invalid Option");
+                    break;
+
+            }
+        }
+
+        private static void CancerPrediction()
+        {
+
+        }
+
+        private static void IntegerPrediction()
+        {
             //Reading Input Dataset
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             List<Sequence> sequences = ReadDataset(Path.Combine(basePath, DatasetFolder, DatasetFileName));
@@ -31,6 +68,7 @@ namespace ApprovedMultiSequenceLearningNew
             List<Sequence> sequencesTest = ReadDataset(Path.Combine(basePath, DatasetFolder, TestsetFileName));
             List<Report> reports = RunMultiSequenceLearningExperiment(sequences, sequencesTest);
             WriteReport(reports, basePath);
+
         }
 
         private static List<Sequence> ReadDataset(string datasetPath)

@@ -1,1 +1,18 @@
-[{"name":"S1","data":[A,B,C,D,F,G,H,I,Q]},{"name":"S2","data":[A,B,C,D,E,F,H,K,Q,L]},{"name":"S3","data":[A,B,C,D,E,F,G,H,Q]}]
+[
+  {
+    "name": "S1",
+    "data": [ "E", "F", "G", "H", "I", "J", "K", "L", "M" ]
+  },
+  {
+    "name": "S2",
+    "data": [ "P", "Q", "R", "S" ]
+  },
+  {
+    "name": "S3",
+    "data": [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" ]
+  },
+  {
+    "name": "S4",
+    "data": [ "C", "D", "G", "H", "J", "K", "L", "M" ]
+  }
+]
