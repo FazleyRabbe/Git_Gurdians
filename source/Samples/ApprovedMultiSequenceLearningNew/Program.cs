@@ -24,13 +24,13 @@ namespace ApprovedMultiSequenceLearningNew
 
         static void Main(string[] args)
         {
-
+            Console.WriteLine("**********************   Welcome By Git Gurdians    ************************ \n ");
             Console.WriteLine("************   ML-23/24-09   Approve Prediction of Multi Sequence Learning    ************** \n ");
-            Console.WriteLine("**************  Scenario - 1 - Cancer_Prediction             ************** ");
-            Console.WriteLine("**************  Scenario - 2 - Power_Consumption_Prediction  ************** ");
+            Console.WriteLine("**************  Option - 1 - Cancer_Prediction             ************** ");
+            Console.WriteLine("**************  Option - 2 - Power_Consumption_Prediction  ************** ");
 
             Console.WriteLine("\n");
-            Console.WriteLine("Please Enter A Scenario Number to Continue with MultiSequence Experiment");
+            Console.WriteLine("Please Select a option to Continue with MultiSequence Experiment");
             string input = Console.ReadLine();      // Read user input (always returns string)
             int userInput = int.Parse(input);
 

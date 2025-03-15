@@ -16,6 +16,22 @@ namespace ApprovedMultiSequenceLearningNew
         }
 
         /// <summary>
+        /// Equivalent to 'Report.cs'
+        /// </summary>
+        public class Report
+        {
+            public Report()
+            {
+                PredictionLog = new List<string>();
+            }
+
+            public string SequenceName { get; set; }
+            public char[] SequenceData { get; set; }
+            public List<string> PredictionLog { get; set; }
+            public double Accuracy { get; set; }
+        }
+
+        /// <summary>
         /// Reads a JSON file containing a List of Sequence objects.
         /// </summary>
         private static List<Sequence> ReadDataset(string path)
