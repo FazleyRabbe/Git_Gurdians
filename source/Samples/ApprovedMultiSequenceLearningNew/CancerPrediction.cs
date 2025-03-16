@@ -34,6 +34,32 @@ namespace ApprovedMultiSequenceLearningNew
             public double Accuracy { get; set; }
         }
 
+
+
+        //  MAIN ENTRY POINT (merged from Program.cs)
+        // ------------------------------------------------------------------------------------
+
+
+        public static void RunAll(string datasetFileName = "dataset_04.json", string testsetFileName = "test_02.json")
+        {
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            // 1) Read the training (dataset) sequences
+            string datasetPath = Path.Combine(basePath, "dataset", datasetFileName);
+            List<Sequence> sequences = ReadDataset(datasetPath);
+
+            // 2) Read the test sequences
+            string testsetPath = Path.Combine(basePath, "dataset", testsetFileName);
+            List<Sequence> sequencesTest = ReadDataset(testsetPath);
+
+            // 3) Train & test
+            List<Report> reports = RunMultiSequenceLearningExperiment(sequences, sequencesTest);
+
+            // 4) Save the final predictions/accuracy into a text report
+            WriteReport(reports, basePath);
+        }
+
+
         // ------------------------------------------------------------------------------------
         //  REPLACING HelperMethods: SCALAR ENCODER / READ-DATASET / ETC.
         // ------------------------------------------------------------------------------------
