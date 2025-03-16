@@ -1,4 +1,6 @@
-﻿using NeoCortexApi.Encoders;
+﻿using NeoCortexApi;
+using NeoCortexApi.Encoders;
+using NeoCortexApi.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,37 @@ namespace ApprovedMultiSequenceLearningNew
             public double Accuracy { get; set; }
         }
 
+        // ------------------------------------------------------------------------------------
+        //  REPLACING HelperMethods: SCALAR ENCODER / READ-DATASET / ETC.
+        // ------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Returns the default HTM config used to build the SP/TM pipeline.
+        /// </summary>
+        private static HtmConfig FetchHTMConfig(int inputBits, int numColumns)
+        {
+            return new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
+            {
+                Random = new ThreadSafeRandom(42),
+                CellsPerColumn = 25,
+                GlobalInhibition = true,
+                LocalAreaDensity = -1,
+                NumActiveColumnsPerInhArea = 0.02 * numColumns,
+                PotentialRadius = (int)(0.15 * inputBits),
+                MaxBoost = 10.0,
+                DutyCyclePeriod = 25,
+                MinPctOverlapDutyCycles = 0.75,
+                MaxSynapsesPerSegment = (int)(0.02 * numColumns),
+                ActivationThreshold = 15,
+                ConnectedPermanence = 0.5,
+                PermanenceDecrement = 0.25,
+                PermanenceIncrement = 0.15,
+                PredictedSegmentDecrement = 0.1
+            };
+        }
+
+        ///////////////////////////////////////
+
         /// <summary>
         /// Reads a JSON file containing a List of Sequence objects.
         /// </summary>
@@ -56,16 +89,16 @@ namespace ApprovedMultiSequenceLearningNew
         private static EncoderBase GetEncoder(int inputBits)
         {
             var settings = new Dictionary<string, object>
-    {
-        { "W", 15 },
-        { "N", inputBits },
-        { "Radius", -1.0 },
-        { "MinVal", 0.0 },
-        { "MaxVal", 26.0 },
-        { "ClipInput", false },
-        { "Periodic", false },
-        { "Name", "scalar" }
-    };
+            {
+                { "W", 15 },
+                { "N", inputBits },
+                { "Radius", -1.0 },
+                { "MinVal", 0.0 },
+                { "MaxVal", 26.0 },
+                { "ClipInput", false },
+                { "Periodic", false },
+                { "Name", "scalar" }
+            };
 
             return new ScalarEncoder(settings);
         }
