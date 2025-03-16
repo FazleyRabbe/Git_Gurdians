@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using NeoCortexApi.Encoders;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,26 @@ namespace ApprovedMultiSequenceLearningNew
                 Console.WriteLine($"Failed to read the dataset: {ex.Message}");
                 return new List<Sequence>();
             }
+        }
+
+        /// <summary>
+        /// Returns a ScalarEncoder for input in range [0..26], wide enough for A..Z.
+        /// </summary>
+        private static EncoderBase GetEncoder(int inputBits)
+        {
+            var settings = new Dictionary<string, object>
+    {
+        { "W", 15 },
+        { "N", inputBits },
+        { "Radius", -1.0 },
+        { "MinVal", 0.0 },
+        { "MaxVal", 26.0 },
+        { "ClipInput", false },
+        { "Periodic", false },
+        { "Name", "scalar" }
+    };
+
+            return new ScalarEncoder(settings);
         }
     }
 }
