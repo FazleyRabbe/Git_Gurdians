@@ -60,6 +60,33 @@ namespace ApprovedMultiSequenceLearningNew
         }
 
 
+        /// <summary>
+        /// Saves the final predictions and accuracies to a text file.
+        /// </summary>
+        private static void WriteReport(List<Report> reports, string basePath)
+        {
+            string reportFolder = EnsureDirectory(Path.Combine(basePath, "report"));
+            string reportPath = Path.Combine(reportFolder, $"report_{DateTime.Now.Ticks}.txt");
+
+            using (StreamWriter sw = File.CreateText(reportPath))
+            {
+                foreach (var r in reports)
+                {
+                    sw.WriteLine("**************");
+                    sw.WriteLine($"Using test sequence: {r.SequenceName} -> {string.Join("-", r.SequenceData)}");
+
+                    foreach (string log in r.PredictionLog)
+                    {
+                        sw.WriteLine($"\t{log}");
+                    }
+
+                    sw.WriteLine($"\tAccuracy: {r.Accuracy}%");
+                    sw.WriteLine("**************");
+                }
+            }
+        }
+
+
         // ------------------------------------------------------------------------------------
         //  REPLACING HelperMethods: SCALAR ENCODER / READ-DATASET / ETC.
         // ------------------------------------------------------------------------------------
@@ -89,6 +116,27 @@ namespace ApprovedMultiSequenceLearningNew
             };
         }
 
+        /// <summary>
+        /// Returns a ScalarEncoder for input in range [0..26], wide enough for A..Z.
+        /// </summary>
+        private static EncoderBase GetEncoder(int inputBits)
+        {
+            var settings = new Dictionary<string, object>
+            {
+                { "W", 15 },
+                { "N", inputBits },
+                { "Radius", -1.0 },
+                { "MinVal", 0.0 },
+                { "MaxVal", 26.0 },
+                { "ClipInput", false },
+                { "Periodic", false },
+                { "Name", "scalar" }
+            };
+
+            return new ScalarEncoder(settings);
+        }
+
+
         ///////////////////////////////////////
 
         /// <summary>
@@ -110,23 +158,28 @@ namespace ApprovedMultiSequenceLearningNew
         }
 
         /// <summary>
-        /// Returns a ScalarEncoder for input in range [0..26], wide enough for A..Z.
+        /// Creates (or ensures existence of) the given directory path.
         /// </summary>
-        private static EncoderBase GetEncoder(int inputBits)
+        private static string EnsureDirectory(string path)
         {
-            var settings = new Dictionary<string, object>
-            {
-                { "W", 15 },
-                { "N", inputBits },
-                { "Radius", -1.0 },
-                { "MinVal", 0.0 },
-                { "MaxVal", 26.0 },
-                { "ClipInput", false },
-                { "Periodic", false },
-                { "Name", "scalar" }
-            };
-
-            return new ScalarEncoder(settings);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            return path;
         }
+
+        // ------------------------------------------------------------------------------------
+        //  HELPER: For char <-> index conversions
+        // ------------------------------------------------------------------------------------
+
+        private static int CharToIndex(char c)
+        {
+            c = char.ToUpperInvariant(c);
+            return c - 'A';  // 'A' => 0, 'Z' => 25
+        }
+
+        // ------------------------------------------------------------------------------------
+        //  END
+        // ------------------------------------------------------------------------------------
+
     }
 }
