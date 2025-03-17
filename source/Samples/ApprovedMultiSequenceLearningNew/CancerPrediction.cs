@@ -59,6 +59,17 @@ namespace ApprovedMultiSequenceLearningNew
             WriteReport(reports, basePath);
         }
 
+        /// <summary>
+        /// Computes simple percentage accuracy = (# correct) / (# predictions).
+        /// </summary>
+        private static double CalculateAccuracy(int matchCount, int predictions)
+        {
+            if (predictions == 0) return 0.0;
+            return (double)matchCount / predictions * 100.0;
+            Console.WriteLine("*******#######*******");
+        }
+
+
 
         /// <summary>
         /// Saves the final predictions and accuracies to a text file.
