@@ -59,6 +59,34 @@ namespace ApprovedMultiSequenceLearningNew
             WriteReport(reports, basePath);
         }
 
+
+        /// <summary>
+        /// Runs the predictor on a test sequence to measure accuracy.
+        /// </summary>
+        private static double PredictNextElement(Predictor predictor, char[] list, Report report)
+        {
+            int matchCount = 0;
+            int predictions = 0;
+            List<string> logs = new List<string>();
+
+            // Reset the predictor's internal state between sequences
+            predictor.Reset();
+
+            // For each pair of (current, next) in the test data
+            for (int i = 0; i < list.Length - 1; i++)
+            {
+                char current = list[i];
+                char next = list[i + 1];
+
+                logs.Add(PredictElement(predictor, current, next, ref matchCount));
+                predictions++;
+            }
+
+            report.PredictionLog = logs;
+            return CalculateAccuracy(matchCount, predictions);
+        }
+
+
         /// <summary>
         /// Computes simple percentage accuracy = (# correct) / (# predictions).
         /// </summary>
