@@ -59,6 +59,41 @@ namespace ApprovedMultiSequenceLearningNew
             WriteReport(reports, basePath);
         }
 
+        // ------------------------------------------------------------------------------------
+        //  HIGH-LEVEL PIPELINE (similar to Program.cs)
+        // ------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Orchestrates the MultiSequenceLearning pipeline: trains on the given sequences
+        /// and then tests with separate test sequences.
+        /// </summary>
+        private static List<Report> RunMultiSequenceLearningExperiment(List<Sequence> sequences, List<Sequence> sequencesTest)
+        {
+            var reports = new List<Report>();
+            // "MultiSequenceLearning" logic inlined as private static methods below
+            var predictor = RunMultiSequenceLearning(sequences);
+
+            // Test each sequence
+            foreach (Sequence item in sequencesTest)
+            {
+                var report = new Report
+                {
+                    SequenceName = item.name,
+                    SequenceData = item.data
+                };
+                Console.WriteLine("*******#######*******");
+                Console.WriteLine($"Test Sequence  {item.name}: {string.Join("", item.data)}");
+                double accuracy = PredictNextElement(predictor, item.data, report);
+                report.Accuracy = accuracy;
+                reports.Add(report);
+
+                Console.WriteLine($"Accuracy for {item.name} sequence: {accuracy}%");
+                Console.WriteLine("********############********");
+            }
+
+            return reports;
+        }
+
 
         /// <summary>
         /// Runs the predictor on a test sequence to measure accuracy.
