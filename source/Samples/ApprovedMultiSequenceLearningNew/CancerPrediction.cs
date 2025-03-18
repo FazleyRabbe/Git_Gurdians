@@ -86,6 +86,41 @@ namespace ApprovedMultiSequenceLearningNew
             return CalculateAccuracy(matchCount, predictions);
         }
 
+        /// <summary>
+        /// Feeds the current char to the predictor, checks its predicted next char, and logs the result.
+        /// </summary>
+        private static string PredictElement(Predictor predictor, char current, char next, ref int matchCount)
+        {
+            Console.WriteLine($"Input: {current}");
+
+            int currentIdx = CharToIndex(current);
+            var predictions = predictor.Predict(currentIdx);
+
+            if (predictions.Any())
+            {
+                // Sort by highest similarity
+                var best = predictions.OrderByDescending(p => p.Similarity).First();
+
+                // "S1_A"
+                string predictedKey = best.PredictedInput;
+                string[] parts = predictedKey.Split('_');
+                string predictedSeq = parts[0];
+                char predictedChar = parts[1][0];  // if "AB", just take the first char
+
+                Console.WriteLine($"Predicted Sequence: {predictedSeq} - Predicted next element: {predictedChar}");
+
+                if (predictedChar == next)
+                    matchCount++;
+
+                return $"Predicted Sequence: {predictedSeq}_{predictedChar} (Real next: {next})";
+            }
+            else
+            {
+                Console.WriteLine("No Prediction");
+                return $"Input: {current}, No Prediction";
+            }
+        }
+
 
         /// <summary>
         /// Computes simple percentage accuracy = (# correct) / (# predictions).
