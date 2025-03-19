@@ -197,6 +197,31 @@ namespace ApprovedMultiSequenceLearningNew
 
 
         // ------------------------------------------------------------------------------------
+        //  REPLACING MultiSequenceLearning.Run(...) WITH A SINGLE METHOD
+        //  (Merged from MultiSequenceLearning.cs)
+        // ------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Trains a Spatial Pooler & Temporal Memory and returns a predictor used for inference.
+        /// </summary>
+        private static Predictor RunMultiSequenceLearning(List<Sequence> sequences)
+        {
+            Console.WriteLine($"Hello NeocortexApi! Cancer Prediction By Git Gurduans");
+
+            // Fewer bits/columns for speed
+            int inputBits = 100;
+            int numColumns = 1024;
+
+            // 1) Build HTM config & an encoder
+            HtmConfig cfg = FetchHTMConfig(inputBits, numColumns);
+            EncoderBase encoder = GetEncoder(inputBits);
+
+            // 2) Actually do the training and return the Predictor
+            return RunExperiment(cfg, encoder, sequences);
+        }
+
+
+        // ------------------------------------------------------------------------------------
         //  REPLACING HelperMethods: SCALAR ENCODER / READ-DATASET / ETC.
         // ------------------------------------------------------------------------------------
 
