@@ -1,9 +1,12 @@
 ﻿using NeoCortexApi;
+using NeoCortexApi.Classifiers;
 using NeoCortexApi.Encoders;
 using NeoCortexApi.Entities;
+using NeoCortexApi.Network;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -218,6 +221,58 @@ namespace ApprovedMultiSequenceLearningNew
 
             // 2) Actually do the training and return the Predictor
             return RunExperiment(cfg, encoder, sequences);
+        }
+
+        /// <summary>
+        /// Does the SP training pass, then SP+TM pass, then returns the final predictor.
+        /// </summary>
+        private static Predictor RunExperiment(HtmConfig cfg, EncoderBase encoder, List<Sequence> sequences)
+        {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            // Create the HTM connections & layer
+            var mem = new Connections(cfg);
+            var layer1 = new CortexLayer<object, object>("L1");
+
+            // 1) Spatial Pooler
+            SpatialPoolerMT sp = new SpatialPoolerMT();
+            sp.Init(mem);
+
+            // 2) Temporal Memory
+            TemporalMemory tm = new TemporalMemory();
+            tm.Init(mem);
+
+            // 3) Classifier
+            var cls = new HtmClassifier<string, ComputeCycle>();
+
+            // Add modules to layer
+            layer1.HtmModules.Add("encoder", encoder);
+            layer1.HtmModules.Add("sp", sp);
+
+            int matches = 0;
+
+            Console.WriteLine("************** START Predicting **************");
+
+            // Very short training loops
+            int maxCycles = 50;
+            int spTrainingPasses = 1;
+            int tmTrainingPasses = 1;
+            
+
+            // Clear classifier after SP stage
+            cls.ClearState();
+
+            // Add TM module
+            layer1.HtmModules.Add("tm", tm);
+
+            
+
+            sw.Stop();
+            Console.WriteLine($"Training completed in {sw.Elapsed}.");
+
+            // Return a predictor that uses the layer, memory, and classifier
+            return new Predictor(layer1, mem, cls);
         }
 
 
