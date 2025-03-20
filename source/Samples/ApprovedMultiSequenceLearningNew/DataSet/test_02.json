@@ -1,18 +1,18 @@
 [
   {
-    "name": "T1",
+    "name": "Test1",
     "data": [ "E", "F", "G", "H" ]
   },
   {
-    "name": "T2",
+    "name": "Test2",
     "data": [ "P", "Q", "R", "S" ]
   },
   {
-    "name": "T3",
+    "name": "Test3",
     "data": [ "A", "B", "C", "D" ]
   },
   {
-    "name": "T4",
+    "name": "Test4",
     "data": [ "C", "D", "G", "H" ]
   }
 ]

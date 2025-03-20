@@ -38,9 +38,7 @@ namespace ApprovedMultiSequenceLearningNew
             {
                 case 1:
                     Console.WriteLine("User Selected MultiSequence Experiment - Cancer_Prediction\n");
-
-                    //CancerPredictionTrainingAndTesting cancerPrediction = new CancerPredictionTrainingAndTesting();
-                    // cancerPrediction.RunMultiSequenceLearningExperiment(userInput, CancerTrainingDataFile, CancerTestingDataFile);
+                    CanPrediction();
                     break;
                 case 2:
                     Console.WriteLine("User Selected MultiSequence Experiment - Power_Consumption_Prediction\n");
@@ -54,8 +52,9 @@ namespace ApprovedMultiSequenceLearningNew
             }
         }
 
-        private static void CancerPrediction()
+        private static void CanPrediction()
         {
+            CancerPrediction.RunAll("dataset_04.json", "test_02.json");
 
         }
 

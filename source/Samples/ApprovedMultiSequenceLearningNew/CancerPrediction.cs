@@ -1,8 +1,8 @@
-﻿using NeoCortexApi;
-using NeoCortexApi.Classifiers;
+﻿using NeoCortexApi.Classifiers;
 using NeoCortexApi.Encoders;
 using NeoCortexApi.Entities;
 using NeoCortexApi.Network;
+using NeoCortexApi;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,11 +10,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace ApprovedMultiSequenceLearningNew
 {
     internal class CancerPrediction
     {
+        // ------------------------------------------------------------------------------------
+        //  NESTED DATA TYPES (merged from Sequence.cs and Report.cs)
+        // ------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Equivalent to 'Sequence.cs'
+        /// </summary>
         public class Sequence
         {
             public string name { get; set; }
@@ -37,8 +45,7 @@ namespace ApprovedMultiSequenceLearningNew
             public double Accuracy { get; set; }
         }
 
-
-
+        // ------------------------------------------------------------------------------------
         //  MAIN ENTRY POINT (merged from Program.cs)
         // ------------------------------------------------------------------------------------
 
@@ -61,6 +68,8 @@ namespace ApprovedMultiSequenceLearningNew
             // 4) Save the final predictions/accuracy into a text report
             WriteReport(reports, basePath);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         // ------------------------------------------------------------------------------------
         //  HIGH-LEVEL PIPELINE (similar to Program.cs)
@@ -96,7 +105,6 @@ namespace ApprovedMultiSequenceLearningNew
 
             return reports;
         }
-
 
         /// <summary>
         /// Runs the predictor on a test sequence to measure accuracy.
@@ -159,7 +167,6 @@ namespace ApprovedMultiSequenceLearningNew
             }
         }
 
-
         /// <summary>
         /// Computes simple percentage accuracy = (# correct) / (# predictions).
         /// </summary>
@@ -169,8 +176,6 @@ namespace ApprovedMultiSequenceLearningNew
             return (double)matchCount / predictions * 100.0;
             Console.WriteLine("*******#######*******");
         }
-
-
 
         /// <summary>
         /// Saves the final predictions and accuracies to a text file.
@@ -197,7 +202,6 @@ namespace ApprovedMultiSequenceLearningNew
                 }
             }
         }
-
 
         // ------------------------------------------------------------------------------------
         //  REPLACING MultiSequenceLearning.Run(...) WITH A SINGLE METHOD
@@ -255,10 +259,31 @@ namespace ApprovedMultiSequenceLearningNew
             Console.WriteLine("************** START Predicting **************");
 
             // Very short training loops
-            int maxCycles = 50;
-            int spTrainingPasses = 1;
-            int tmTrainingPasses = 1;
-            
+            int maxCycles = 100;
+            int spTrainingPasses = 2;
+            int tmTrainingPasses = 2;
+
+            // -------------------------------------------------
+            // 1) SP-only pass
+            // -------------------------------------------------
+            Console.WriteLine($"=== Newborn SP Training Pass 1 ===");
+            for (int i = 0; i < spTrainingPasses; i++)
+            {
+                for (int cycle = 0; cycle < maxCycles; cycle++)
+                {
+                    Debug.WriteLine($"************** Newborn SP Cycle {cycle} **************");
+                    Console.WriteLine($"************** Newborn SP Cycle {cycle} **************");
+
+                    foreach (var seq in sequences)
+                    {
+                        foreach (char ch in seq.data)
+                        {
+                            int inputVal = CharToIndex(ch);
+                            layer1.Compute(inputVal, learn: true); // SP learning only
+                        }
+                    }
+                }
+            }
 
             // Clear classifier after SP stage
             cls.ClearState();
@@ -266,7 +291,49 @@ namespace ApprovedMultiSequenceLearningNew
             // Add TM module
             layer1.HtmModules.Add("tm", tm);
 
-            
+            // -------------------------------------------------
+            // 2) SP+TM pass
+            // -------------------------------------------------
+            for (int pass = 0; pass < tmTrainingPasses; pass++) // *** CHANGED FOR HIGHER ACCURACY ***
+            {
+                Console.WriteLine($"=== SP+TM Training Pass {pass + 1} ===");
+
+                for (int cycle = 0; cycle < maxCycles; cycle++)
+                {
+                    foreach (var seq in sequences)
+                    {
+                        Debug.WriteLine($"************** Sequences {seq.name} **************");
+                        Console.WriteLine($"************** Sequences {seq.name} **************");
+                        int maxPrevInputs = seq.data.Length - 1;
+
+                        List<string> previousInputs = new List<string>();
+
+                        previousInputs.Add("-1");
+
+
+                        foreach (char ch in seq.data)
+                        {
+                            Debug.WriteLine($"************** {ch} **************");
+                            //Console.WriteLine($"************** {ch} **************");
+
+                            int inputVal = CharToIndex(ch);
+                            var cyOut = layer1.Compute(inputVal, learn: true) as ComputeCycle;
+
+                            // Build a label like "S1_A"
+                            string key = $"{seq.name}_{ch}";
+
+                            // Use either active or winner cells
+                            List<Cell> actCells = (cyOut.ActiveCells.Count == cyOut.WinnerCells.Count)
+                                                  ? cyOut.ActiveCells
+                                                  : cyOut.WinnerCells;
+
+                            cls.Learn(key, actCells.ToArray());
+                        }
+
+                    }
+                }
+
+            }
 
             sw.Stop();
             Console.WriteLine($"Training completed in {sw.Elapsed}.");
@@ -275,6 +342,10 @@ namespace ApprovedMultiSequenceLearningNew
             return new Predictor(layer1, mem, cls);
         }
 
+
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////// Done /////////////////////////////////////////////
 
         // ------------------------------------------------------------------------------------
         //  REPLACING HelperMethods: SCALAR ENCODER / READ-DATASET / ETC.
@@ -324,9 +395,6 @@ namespace ApprovedMultiSequenceLearningNew
 
             return new ScalarEncoder(settings);
         }
-
-
-        ///////////////////////////////////////
 
         /// <summary>
         /// Reads a JSON file containing a List of Sequence objects.
