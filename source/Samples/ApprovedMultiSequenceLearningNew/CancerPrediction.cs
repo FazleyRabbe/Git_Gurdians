@@ -69,7 +69,6 @@ namespace ApprovedMultiSequenceLearningNew
             WriteReport(reports, basePath);
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////
 
         // ------------------------------------------------------------------------------------
         //  HIGH-LEVEL PIPELINE (similar to Program.cs)
@@ -203,11 +202,7 @@ namespace ApprovedMultiSequenceLearningNew
             }
         }
 
-        // ------------------------------------------------------------------------------------
-        //  REPLACING MultiSequenceLearning.Run(...) WITH A SINGLE METHOD
-        //  (Merged from MultiSequenceLearning.cs)
-        // ------------------------------------------------------------------------------------
-
+        
         /// <summary>
         /// Trains a Spatial Pooler & Temporal Memory and returns a predictor used for inference.
         /// </summary>
@@ -344,12 +339,7 @@ namespace ApprovedMultiSequenceLearningNew
 
 
 
-        ////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////// Done /////////////////////////////////////////////
-
-        // ------------------------------------------------------------------------------------
-        //  REPLACING HelperMethods: SCALAR ENCODER / READ-DATASET / ETC.
-        // ------------------------------------------------------------------------------------
+  
 
         /// <summary>
         /// Returns the default HTM config used to build the SP/TM pipeline.
