@@ -157,7 +157,7 @@ namespace ApprovedMultiSequenceLearningNew
                 if (predictedChar == next)
                     matchCount++;
 
-                return $"Predicted Sequence: {predictedSeq}_{predictedChar} (Real next: {next})";
+                return $"Input: {current}, Predicted Sequence: {predictedSeq}, Predicted next element: {predictedChar}";
             }
             else
             {
