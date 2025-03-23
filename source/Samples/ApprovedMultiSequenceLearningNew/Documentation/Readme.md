@@ -10,9 +10,9 @@ After the model finishes its repeated training process, it will automatically st
 
 Fig 1: Architecture of Approve Prediction of Multisequence Learning
 
-Above our project's implementation flow.
+Above is our project's implementation flow.
 
-The model used to process and store the dataset is called `Sequence`. And as shown below:
+At first, the model gets the dataset as a sequence from our JSON dataset folder by `sequence.cs`
 
 For power consumption prediction:
 ```csharp
@@ -392,6 +392,5 @@ Fig. 4: Prediction of next elements with accuracy for Power_Consumption_Predicti
 
 - Forked from [ddobric/neocortexapi](https://github.com/ddobric/neocortexapi)
 
-- [Numenta Research Publication](https://www.numenta.com/resources/research-publications/) 
+- [Hawkins, J., & Blakeslee, S. (2004). On Intelligence. Times Books](https://doi.org/10.2514/1.18111) 
 
-- [Machine Learning Guide to HTM](https://www.numenta.com/blog/2019/10/24/machine-learning-guide-to-htm/)
