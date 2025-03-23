@@ -1,0 +1,29 @@
+**************
+Using test sequence: Test1 -> 5-6-7-8
+	Input: 5, Predicted Sequence: S1_7, Predicted next element: 6
+	Input: 6, Predicted Sequence: S1_, Predicted next element: 7
+	Input: 7, Predicted Sequence: S4_, Predicted next element: 8
+	Accuracy: 100%
+**************
+**************
+Using test sequence: Test2 -> 6-11-12-13
+	Input: 6, Predicted Sequence: S2_12, Predicted next element: 11
+	Input: 11, Predicted Sequence: S2_13, Predicted next element: 12
+	Input: 12, Predicted Sequence: S2_4, Predicted next element: 13
+	Accuracy: 100%
+**************
+**************
+Using test sequence: Test3 -> 1-2-3-4
+	Input: 1, Predicted Sequence: S3_3, Predicted next element: 2
+	Input: 2, Predicted Sequence: S3_4, Predicted next element: 3
+	Input: 3, Predicted Sequence: S3_8, Predicted next element: 4
+	Accuracy: 100%
+**************
+**************
+Using test sequence: Test4 -> 3-4-7-8-10
+	Input: 3, Predicted Sequence: S4_7, Predicted next element: 4
+	Input: 4, Predicted Sequence: S4_8, Predicted next element: 7
+	Input: 7, Predicted Sequence: S4_10, Predicted next element: 8
+	Input: 8, Predicted Sequence: S4_11, Predicted next element: 10
+	Accuracy: 100%
+**************
