@@ -1,0 +1,28 @@
+**************
+Using test sequence: Test1 -> E-F-G-H
+	Input: E, Predicted Sequence: S3, Predicted next element: F
+	Input: F, Predicted Sequence: S3, Predicted next element: G
+	Input: G, Predicted Sequence: S3, Predicted next element: H
+	Accuracy: 100%
+**************
+**************
+Using test sequence: Test2 -> P-Q-R-S
+	Input: P, Predicted Sequence: S2, Predicted next element: Q
+	Input: Q, Predicted Sequence: S2, Predicted next element: R
+	Input: R, Predicted Sequence: S2, Predicted next element: S
+	Accuracy: 100%
+**************
+**************
+Using test sequence: Test3 -> A-B-C-D
+	Input: A, Predicted Sequence: S3, Predicted next element: B
+	Input: B, Predicted Sequence: S3, Predicted next element: C
+	Input: C, Predicted Sequence: S3, Predicted next element: D
+	Accuracy: 100%
+**************
+**************
+Using test sequence: Test4 -> C-D-G-H
+	Input: C, Predicted Sequence: S4, Predicted next element: D
+	Input: D, Predicted Sequence: S4, Predicted next element: G
+	Input: G, Predicted Sequence: S4, Predicted next element: H
+	Accuracy: 100%
+**************
