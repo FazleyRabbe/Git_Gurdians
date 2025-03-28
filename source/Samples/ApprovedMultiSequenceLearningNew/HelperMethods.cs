@@ -130,16 +130,17 @@ namespace ApprovedMultiSequenceLearningNew
 
         private static int[] GenerateRandomSequence(int size, int startVal, int stopVal)
         {
-            var rnd = new Random();
-            var sequence = new HashSet<int>();
+            var rnd = new Random(); // Initializes a random number generator
+            var sequence = new HashSet<int>(); // Stores unique integers
 
-            while (sequence.Count < size)
+            while (sequence.Count < size) // Keep generating until desired size is reached
             {
-                int number = rnd.Next(startVal, stopVal + 1);
-                sequence.Add(number);
+                int number = rnd.Next(startVal, stopVal + 1); // Generate a random number in the given range
+                sequence.Add(number); // Add to the set (duplicates automatically ignored)
             }
 
-            return sequence.OrderBy(n => n).ToArray();
+            return sequence.OrderBy(n => n).ToArray(); // Return sorted array of unique numbers
         }
+    }
     }
 }
