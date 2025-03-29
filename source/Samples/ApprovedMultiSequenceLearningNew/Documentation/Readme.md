@@ -4,13 +4,21 @@
 Multi-sequence learning in Hierarchical Temporal Memory (HTM) is concerned with making a computational model learn and predict patterns from many sequences of time-series data. In this paper, we present a new extension to the HTM pipeline that directly reads training sequences from JSON files, making it easy to ingest large-scale data. The data is encoded into Sparse Distributed Representations (SDRs) using a scalar encoder, which preserves both Character and numerical range, but also the temporal sequence ordering of every sequence. The SDRs are passed to the Spatial Pooler (SP) for learning stable representations of input patterns, which are passed to the Temporal Memory (TM) for encoding longer-term sequential dependencies.
 After the model finishes its repeated training process, it will automatically start loading test sequences from separate datasets. This setup lets the system predict the next element in each sequence and calculate an overall accuracy. We evaluate this multi-sequence approach in Two different fields - cancer prediction and power consumption prediction with HTM showing the patterns and trends within each dataset. By combining an HTM-based process with simple JSON data handling, the project provides a strong and easy-to-use platform for sequence modeling in many different areas.
 
+## System Requirements
+
+- **Operating System**: Windows 10+ or macOS
+- **Processor**: Multi-core processor recommended
+- **Memory**: 8GB RAM minimum, 16GB recommended
+- **Storage**: 2GB for installation, additional space for processing
+- **Dependencies**: .NET 8.0 SDK and runtime
+  
 ## Implementation
 
 ### Prerequisites
 
 Ensure you have the following installed on your system:
 
-- .NET SDK (9.0 or later)** – [Download Here](https://dotnet.microsoft.com/en-us/download)
+- .NET SDK (8.0 or later)** – [Download Here](https://dotnet.microsoft.com/en-us/download)
 
 - For code debugging, we recommend using Visual Studio 2022/visual studio code IDE.
 
@@ -23,9 +31,15 @@ https://github.com/ddobric/neocortexapi.git
 ```sh
 https://github.com/FazleyRabbe/Git_Gurdians.git
 ```
-To clone the repository at first you have to create a folder in your computer. Then you have to open visual studio 2022. After that,  you have to put the repository location and the folder path.
+To clone the repository at first you have to create a folder in your local drive. Then you have to open visual studio 2022 and select the `Clone a repository`. After that, you have to put the `repository location` and the `folder path` and clone it.
 
-### 3. Install Required NuGet Packages
+### 3. Open Project
+Go to your project folder, then inside the `source folder` you will get the `NeoCortexApi.sln`, then open it.
+
+### 4. Run the project
+First, Build your project, then select the `ApprovedMultiSequenceLearningNew ` and run the project. 
+
+### 5. Install Required NuGet Packages
 You have to install every required package from Visual Studio 2022.
 
 ## Workflow Diagram
@@ -386,7 +400,7 @@ private const string TestsetFileName = "test_01.json";
 ```
 3. Now Start Debugging `ApprovedMultiSequenceLearningNew`. You will be see in console there have 2 option for predicton as you can see in given image:
 
-   ![image](https://github.com/FazleyRabbe/Git_Gurdians/blob/master/source/Samples/ApprovedMultiSequenceLearningNew/Documentation/Image%20and%20Result/User%20Select.jpg)
+   ![image](https://github.com/FazleyRabbe/Git_Gurdians/blob/master/source/Samples/ApprovedMultiSequenceLearningNew/Documentation/Image%20and%20Result/User%20Select%20white%20background.jpg)
    
 Fig. 2: User choosen options for prediction.
 
@@ -400,13 +414,13 @@ We have used a range of datasets to do as much experimentation as is practical. 
 
 - Here the given figure shown the prediction of next element for the Cancer Prediction scenario. For example, the sequence `CDGH` predicted the next elements with 100% accuracy. 
 
-![results](https://github.com/FazleyRabbe/Git_Gurdians/blob/master/source/Samples/ApprovedMultiSequenceLearningNew/Documentation/Image%20and%20Result/Cancer%20Prediction.jpg)
+![results](https://github.com/FazleyRabbe/Git_Gurdians/blob/master/source/Samples/ApprovedMultiSequenceLearningNew/Documentation/Image%20and%20Result/Cancer%20Prediction%20white%20Background.jpg)
     
 Fig. 3: Prediction of next elements with accuracy for Cancer Prediction scenario
 
 - The figure shows the Prediction of the next elements with accuracy for the Power Consumption scenario. For example the sequence `3, 4, 7, 8, 9` predicted next elements with 100% accuracy.
 
-![results](https://github.com/FazleyRabbe/Git_Gurdians/blob/master/source/Samples/ApprovedMultiSequenceLearningNew/Documentation/Image%20and%20Result/Power_Consumption.jpg)
+![results](https://github.com/FazleyRabbe/Git_Gurdians/blob/master/source/Samples/ApprovedMultiSequenceLearningNew/Documentation/Image%20and%20Result/Power_Consumption%20white%20Background.jpg)
     
 Fig. 4: Prediction of next elements with accuracy for Power_Consumption_Prediction scenario
 
