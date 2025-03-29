@@ -6,6 +6,30 @@ After the model finishes its repeated training process, it will automatically st
 
 ## Implementation
 
+### Prerequisites
+
+Ensure you have the following installed on your system:
+
+- .NET SDK (9.0 or later)** – [Download Here](https://dotnet.microsoft.com/en-us/download)
+
+- For code debugging, we recommend using Visual Studio 2022/visual studio code IDE.
+
+### 1. fork from
+
+```sh
+https://github.com/ddobric/neocortexapi.git
+```
+### 2. Clone the repository
+```sh
+https://github.com/FazleyRabbe/Git_Gurdians.git
+```
+To clone the repository at first you have to create a folder in your computer. Then you have to open visual studio 2022. After that,  you have to put the repository location and the folder path.
+
+### 3. Install Required NuGet Packages
+You have to install every required package from Visual Studio 2022.
+
+## Workflow Diagram
+
 ![image](https://github.com/FazleyRabbe/Git_Gurdians/blob/master/source/Samples/ApprovedMultiSequenceLearningNew/Documentation/Image%20and%20Result/flowchart%20diagram.png)
 
 Fig 1: Architecture of Approve Prediction of Multisequence Learning
@@ -386,11 +410,10 @@ Fig. 3: Prediction of next elements with accuracy for Cancer Prediction scenario
     
 Fig. 4: Prediction of next elements with accuracy for Power_Consumption_Prediction scenario
 
-
+## Conclusion
+In conclusion, our research emphasizes the importance of Multisequence Learning in enhancing predictive analytics across multiple domains. We demonstrated the potential of a novel strategy for automating sequence extraction and prediction testing from .JSON files to increase efficiency and accuracy when compared to manual approaches. Our findings demonstrate the technique's application across a wide range of businesses, from power consumption forecasting to cancer prediction. Through testing, we proved the effectiveness of our technique in properly predicting sequences, confirming its value for a wide range of applications. In essence, our study not only explains the principles of Multisequence Learning, but it also pioneers a streamlined way for propelling sequence prediction toward speedier and more reliable outcomes, supporting innovation and development in predictive modeling paradigms.
 
 ## Reference
-
-- Forked from [ddobric/neocortexapi](https://github.com/ddobric/neocortexapi)
 
 - [Hawkins, J., & Blakeslee, S. (2004). On Intelligence. Times Books](https://doi.org/10.2514/1.18111) 
 
