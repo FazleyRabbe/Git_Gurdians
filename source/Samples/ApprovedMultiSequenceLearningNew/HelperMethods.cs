@@ -142,5 +142,5 @@ namespace ApprovedMultiSequenceLearningNew
             return sequence.OrderBy(n => n).ToArray(); // Return sorted array of unique numbers
         }
     }
-    }
+    
 }
